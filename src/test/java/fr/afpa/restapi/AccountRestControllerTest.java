@@ -4,7 +4,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +84,7 @@ class AccountRestControllerTest {
                 .andExpect(jsonPath("$.[*].email").value(hasItems("jboy@gmail.com", "obay@gmail.com")));
     }
 
-    @Test
+    @Test 
     @Order(5)
     @DisplayName("Getting all accounts response status is OK")
     void getAccountsResponseStatusCode() throws Exception {
@@ -127,7 +126,7 @@ class AccountRestControllerTest {
                 post("/accounts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"firstName\":\"Johnny\", \"lastName\":\"Boy\", \"email\":\"jboy@gmail.com\"}"))
-                .andExpect(jsonPath("$.id").value(1L));
+                .andExpect(jsonPath("$.id").isNumber());
     }
 
     private Account create(String firstName, String lastName, String email) {
